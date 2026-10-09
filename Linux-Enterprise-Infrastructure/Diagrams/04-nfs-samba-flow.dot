@@ -1,0 +1,14 @@
+digraph G {
+  graph [rankdir=LR, bgcolor="white", pad=0.3, nodesep=0.5, ranksep=0.7, fontname="Arial"];
+  node [shape=box, style="rounded,filled", fillcolor="#F7F9FC", color="#46637F", fontname="Arial", margin="0.18"];
+  edge [color="#58738D", fontname="Arial", arrowsize=0.8];
+
+  storage [label="Server1 shared storage", fillcolor="#FFF6DC"];
+  nfs [label="NFS export\n/etc/exports", fillcolor="#EEF9ED"];
+  samba [label="Samba share\n/etc/samba/smb.conf", fillcolor="#E8F3FF"];
+  linux [label="Linux clients\nmount / showmount"];
+  mixed [label="Linux / Windows-style SMB clients\nsmbclient"];
+
+  storage -> nfs -> linux;
+  storage -> samba -> mixed;
+}

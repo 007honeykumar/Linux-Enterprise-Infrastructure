@@ -1,0 +1,12 @@
+# AUTO-GENERATED FILE - DO NOT EDIT!! Use ldapmodify.
+# CRC32 73cb0eb6
+dn: cn=config
+objectClass: olcGlobal
+cn: config
+structuralObjectClass: olcGlobal
+entryUUID: d17276a6-1188-1041-9897-bf3a2ce78c59
+creatorsName: cn=config
+createTimestamp: 20260711152748Z
+entryCSN: 20260711152748.835609Z#000000#000#000000
+modifiersName: cn=config
+modifyTimestamp: 20260711152748Z

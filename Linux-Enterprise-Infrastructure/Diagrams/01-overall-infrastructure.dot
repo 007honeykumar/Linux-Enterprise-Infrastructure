@@ -1,0 +1,23 @@
+digraph G {
+  graph [rankdir=TB, bgcolor="white", pad=0.3, nodesep=0.5, ranksep=0.7, fontname="Arial"];
+  node [shape=box, style="rounded,filled", fillcolor="#F7F9FC", color="#46637F", fontname="Arial", margin="0.18"];
+  edge [color="#58738D", fontname="Arial", arrowsize=0.8];
+
+  internet [label="Internet", shape=ellipse, fillcolor="#E8F3FF"];
+  igw [label="AWS Internet Gateway"];
+  vpc [label="AWS VPC\n172.31.0.0/16", shape=folder, fillcolor="#FFF6DC"];
+  subnet [label="Public Subnet\nEC2 lab network", shape=folder, fillcolor="#EEF9ED"];
+
+  server1 [label="Server1 · Amazon Linux\n172.31.36.76\nBIND · Apache · HTTPS\nNFS · Samba · OpenLDAP"];
+  server2 [label="Server2 · Amazon Linux\n172.31.42.133\nFTP · rsync backup target"];
+  client1 [label="Client1 · Amazon Linux\n172.31.41.65\nTesting client"];
+  ubuntu [label="Ubuntu Client\n172.31.46.191\nTesting client"];
+  rhel [label="RHEL Client\n172.31.45.206\nKea DHCP lab · testing"];
+
+  internet -> igw -> vpc -> subnet;
+  subnet -> server1;
+  subnet -> server2;
+  subnet -> client1;
+  subnet -> ubuntu;
+  subnet -> rhel;
+}

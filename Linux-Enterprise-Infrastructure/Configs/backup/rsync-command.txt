@@ -1,0 +1,2 @@
+# Replace paths only if your final lab command differed.
+rsync -avz ~/project-data/ ec2-user@172.31.42.133:/backup/server1/

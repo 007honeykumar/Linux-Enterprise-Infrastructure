@@ -1,0 +1,42 @@
+digraph G {
+  graph [rankdir=TB, bgcolor="white", pad=0.35, nodesep=0.45, ranksep=0.65, fontname="Arial", compound=true];
+  node [shape=box, style="rounded,filled", fillcolor="#F7F9FC", color="#46637F", fontname="Arial", margin="0.16"];
+  edge [color="#58738D", fontname="Arial", arrowsize=0.75];
+
+  internet [label="Internet", shape=ellipse, fillcolor="#E8F3FF"];
+  igw [label="Internet Gateway"];
+  route [label="Route table\n0.0.0.0/0 → IGW"];
+  sg [label="Security groups\nSSH · HTTP/S · DNS · service ports", fillcolor="#FFF6DC"];
+
+  subgraph cluster_vpc {
+    label="AWS VPC 172.31.0.0/16";
+    color="#B7C7D6";
+    style="rounded";
+
+    dnsaws [label="AWS VPC resolver\n172.31.0.2"];
+
+    subgraph cluster_subnet {
+      label="Public subnet";
+      color="#C7D8C4";
+      style="rounded";
+
+      s1 [label="Server1 · 172.31.36.76\nDNS 53 · HTTP 80 · HTTPS 443\nNFS · SMB 445 · LDAP 389"];
+      s2 [label="Server2 · 172.31.42.133\nFTP 21 · Backup via SSH 22"];
+      c1 [label="Amazon Linux client\n172.31.41.65"];
+      ub [label="Ubuntu client\n172.31.46.191"];
+      rh [label="RHEL client\n172.31.45.206\nKea DHCP lab"];
+    }
+  }
+
+  internet -> igw -> route -> sg -> s1;
+  sg -> s2;
+  sg -> c1;
+  sg -> ub;
+  sg -> rh;
+
+  c1 -> s1 [label=" DNS / web / file tests "];
+  ub -> s1 [label=" NFS / DNS / web "];
+  rh -> s1 [label=" DNS / SMB / LDAP test "];
+  s1 -> dnsaws [label=" forward external DNS "];
+  s1 -> s2 [label=" rsync over SSH "];
+}

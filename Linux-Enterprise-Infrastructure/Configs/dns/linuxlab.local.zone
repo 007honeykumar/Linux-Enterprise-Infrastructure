@@ -1,0 +1,21 @@
+$TTL 86400
+@       IN      SOA     server1.linuxlab.local. root.linuxlab.local. (
+                        2026070502
+                        3600
+                        1800
+                        604800
+                        86400
+)
+
+        IN      NS      server1.linuxlab.local.
+
+server1        IN      A       172.31.36.76
+server2        IN      A       172.31.42.133
+client1        IN      A       172.31.41.65
+ubuntu-client  IN      A       172.31.46.191
+rhel-client    IN      A       172.31.36.14
+
+web1           IN      A       172.31.36.76
+web2           IN      A       172.31.36.76
+files          IN      A       172.31.36.76
+ftp            IN      A       172.31.42.133

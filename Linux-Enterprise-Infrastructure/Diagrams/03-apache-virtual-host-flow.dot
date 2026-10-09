@@ -1,0 +1,18 @@
+digraph G {
+  graph [rankdir=LR, bgcolor="white", pad=0.3, nodesep=0.5, ranksep=0.7, fontname="Arial"];
+  node [shape=box, style="rounded,filled", fillcolor="#F7F9FC", color="#46637F", fontname="Arial", margin="0.18"];
+  edge [color="#58738D", fontname="Arial", arrowsize=0.8];
+
+  browser [label="Client browser / curl"];
+  dns [label="BIND DNS\nBoth names → Server1"];
+  apache [label="Apache HTTP Server\nChecks Host header", fillcolor="#FFF6DC"];
+  web1 [label="web1.linuxlab.local\n/var/www/web1", fillcolor="#EEF9ED"];
+  web2 [label="web2.linuxlab.local\n/var/www/web2", fillcolor="#EEF9ED"];
+  tls [label="HTTPS listener :443\nSelf-signed lab certificate", fillcolor="#E8F3FF"];
+
+  browser -> dns -> apache;
+  apache -> web1 [label=" Host: web1... "];
+  apache -> web2 [label=" Host: web2... "];
+  browser -> tls [label=" HTTPS "];
+  tls -> apache;
+}

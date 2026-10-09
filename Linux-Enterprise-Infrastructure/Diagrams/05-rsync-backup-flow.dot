@@ -1,0 +1,12 @@
+digraph G {
+  graph [rankdir=LR, bgcolor="white", pad=0.3, nodesep=0.6, ranksep=0.7, fontname="Arial"];
+  node [shape=box, style="rounded,filled", fillcolor="#F7F9FC", color="#46637F", fontname="Arial", margin="0.2"];
+  edge [color="#58738D", fontname="Arial", arrowsize=0.8];
+
+  source [label="Server1\n~/project-data", fillcolor="#EEF9ED"];
+  ssh [label="rsync over SSH\nIncremental transfer", fillcolor="#FFF6DC"];
+  target [label="Server2\n/backup/server1", fillcolor="#E8F3FF"];
+  verify [label="Verification\nls / checksums / repeat run"];
+
+  source -> ssh -> target -> verify;
+}
